@@ -1,0 +1,9 @@
+LogicBricks/Unity/3DGameKit/
+~.*
+~*.
+~*
+
+**/.vs/
+**/Library/
+**/Temp/
+**/obj/
