@@ -1,7 +1,11 @@
 # MKdev.M2Mqtt.Unity3D
-Implementation for MQTT over TCP for Unity3D base on eclipse/paho.mqtt.m2mqtt
+Implementation for MQTT over TCP for Unity3D base on eclipse/paho.mqtt.m2mqtt :
+https://github.com/eclipse/paho.mqtt.m2mqtt
 
 This is a wrapper for paho.mqtt.m2mqtt to use MQTT/TCP in Unity3D.
+
+Although project stays in Master, it's actually in development and not ready to produktionmode!!!
+Use this project just for development or research, please.
 
 It works for:
 - Unity3D 2017.4 and above
