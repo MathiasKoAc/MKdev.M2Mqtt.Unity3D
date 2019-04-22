@@ -292,12 +292,21 @@
     <Compile Include="Assets\M2Mqtt\Session\MqttSession.cs" />
     <Compile Include="Assets\M2Mqtt\Utility\QueueExtension.cs" />
     <Compile Include="Assets\M2Mqtt\Utility\Trace.cs" />
-    <Compile Include="Assets\MKdev\MqttForUnity\Code\EnumMqttQualityOfService.cs" />
-    <Compile Include="Assets\MKdev\MqttForUnity\Code\IMqttTopicReceiver.cs" />
-    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttConnector.cs" />
-    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttTopicDoAction.cs" />
-    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttTopicToConsole.cs" />
-    <Compile Include="Assets\MKdev\MqttForUnity\Code\OnGuiMqttBsp.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\CreateObject.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\Logic\EnumCompareOperator.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\Logic\EnumStringCompareOperator.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBasic\EnumMqttQualityOfService.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBasic\IMqttTopicReceiver.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBasic\InteractionEvent.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBasic\MqttConnector.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBasic\MqttTopicDoAction.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBasic\MqttTopicToConsole.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBasic\OnGuiMqttBsp.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBricks\DoActionByMqttTopicArives.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBricks\DoActionByMqttTopicIntValue.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBricks\DoActionByMqttTopicStringValue.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBricks\DoActionByMqttTopicValue.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBricks\MqttConnectorSingleTon.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

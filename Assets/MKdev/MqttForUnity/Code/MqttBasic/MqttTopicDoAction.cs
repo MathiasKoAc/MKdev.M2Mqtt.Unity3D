@@ -9,8 +9,6 @@ namespace MKdev.MqttForUnity
         public MqttConnector MqttCon;
         public string publishTopic = "hello/world";
 
-        [System.Serializable]
-        public class InteractionEvent : UnityEvent { }
         public InteractionEvent onStart = new InteractionEvent();
 
         private void Start()

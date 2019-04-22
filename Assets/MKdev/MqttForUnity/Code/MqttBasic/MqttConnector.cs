@@ -65,10 +65,7 @@ namespace MKdev.MqttForUnity
                             }
                         }
                     }
-
-                    Debug.Log("workQueueAndCall: " + System.Text.Encoding.UTF8.GetString(e.Message));
                 }
-
                 yield return null;
             }
         }
