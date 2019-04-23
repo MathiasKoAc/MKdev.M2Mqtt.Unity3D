@@ -9,6 +9,9 @@ using System.Collections;
 
 namespace MKdev.MqttForUnity
 {
+    /**
+     * It connects the UnityScene with the Broker
+     */ 
     public class MqttConnector : MonoBehaviour
     {
         public string BrokerIp = "192.168.0.2";

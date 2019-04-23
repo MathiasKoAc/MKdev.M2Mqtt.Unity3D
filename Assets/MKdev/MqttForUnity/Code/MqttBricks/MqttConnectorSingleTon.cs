@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace MKdev.MqttForUnity
+namespace MKdev.MqttForUnity.MqttBricks
 {
+    /**
+     * It connects the UnityScene with the Broker and is findable by GetInstance as SingleTon
+     */
     public class MqttConnectorSingleTon : MqttConnector
     {
 
@@ -29,7 +30,9 @@ namespace MKdev.MqttForUnity
         }
 
 
-        // Ensure that the instance is destroyed when the game is stopped in the editor.
+        /**
+         * Ensure that the instance is destroyed when the game is stopped in the editor.
+         */
         void OnApplicationQuit()
         {
             s_Instance = null;

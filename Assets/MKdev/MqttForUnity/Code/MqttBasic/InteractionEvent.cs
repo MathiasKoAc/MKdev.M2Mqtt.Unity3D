@@ -1,4 +1,8 @@
 ﻿using UnityEngine.Events;
 
-[System.Serializable]
-public class InteractionEvent : UnityEvent { };
+namespace MKdev
+{
+    [System.Serializable]
+    public class InteractionEvent : UnityEvent { };
+}
+

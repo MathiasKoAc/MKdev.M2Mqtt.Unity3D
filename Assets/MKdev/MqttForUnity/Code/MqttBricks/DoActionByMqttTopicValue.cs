@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MKdev.MqttForUnity
+namespace MKdev.MqttForUnity.MqttBricks
 {
     public abstract class DoActionByMqttTopicValue : MonoBehaviour, IMqttTopicReceiver
     {

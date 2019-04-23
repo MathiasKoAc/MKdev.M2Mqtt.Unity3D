@@ -1,7 +1,7 @@
 ﻿using MKdev.Logic;
 using System;
 
-namespace MKdev.MqttForUnity
+namespace MKdev.MqttForUnity.MqttBricks
 {
     public class DoActionByMqttTopicIntValue : DoActionByMqttTopicValue
     {

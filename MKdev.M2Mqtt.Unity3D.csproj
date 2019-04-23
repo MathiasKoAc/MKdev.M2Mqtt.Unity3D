@@ -292,7 +292,8 @@
     <Compile Include="Assets\M2Mqtt\Session\MqttSession.cs" />
     <Compile Include="Assets\M2Mqtt\Utility\QueueExtension.cs" />
     <Compile Include="Assets\M2Mqtt\Utility\Trace.cs" />
-    <Compile Include="Assets\MKdev\MqttForUnity\Code\CreateObject.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\Example\CreateObject.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\Example\OnGuiMqttBsp.cs" />
     <Compile Include="Assets\MKdev\MqttForUnity\Code\Logic\EnumCompareOperator.cs" />
     <Compile Include="Assets\MKdev\MqttForUnity\Code\Logic\EnumStringCompareOperator.cs" />
     <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBasic\EnumMqttQualityOfService.cs" />
@@ -301,7 +302,6 @@
     <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBasic\MqttConnector.cs" />
     <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBasic\MqttTopicDoAction.cs" />
     <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBasic\MqttTopicToConsole.cs" />
-    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBasic\OnGuiMqttBsp.cs" />
     <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBricks\DoActionByMqttTopicArives.cs" />
     <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBricks\DoActionByMqttTopicIntValue.cs" />
     <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBricks\DoActionByMqttTopicStringValue.cs" />
