@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
-
-
 using System;
 using System.Collections;
+using MKdev.ServerConfig;
 
 namespace MKdev.MqttForUnity
 {
@@ -14,10 +13,7 @@ namespace MKdev.MqttForUnity
      */ 
     public class MqttConnector : MonoBehaviour
     {
-        public string BrokerIp = "192.168.0.2";
-        public string username = "";
-        public string password = "";
-
+        public AbsServerConfig ServerConfig;
 
         private MqttClient client;
         private Dictionary<string, List<IMqttTopicReceiver>> DictTopicReceiver;
@@ -33,13 +29,13 @@ namespace MKdev.MqttForUnity
             
             // create client instance 
             //client = new MqttClient(IPAddress.Parse("143.185.118.233"),8080 , false , null ); 
-            client = new MqttClient(BrokerIp);
+            client = new MqttClient(this.ServerConfig.GetServerIp());
 
             // register to message received 
             client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
 
             string clientId = Guid.NewGuid().ToString();
-            client.Connect(clientId, username, password);
+            client.Connect(clientId, ServerConfig.GetUsername(), ServerConfig.GetPassword());
         }
 
         void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
