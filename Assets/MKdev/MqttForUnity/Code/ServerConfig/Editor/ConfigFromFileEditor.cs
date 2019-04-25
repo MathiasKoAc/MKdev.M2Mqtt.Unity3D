@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace MKdev.ServerConfig
+namespace MKdev.ServerConfig.ConfigEditor
 {
     [CustomEditor(typeof(ConfigFromJSONFile))]
     public class ConfigFromFileEditor : Editor

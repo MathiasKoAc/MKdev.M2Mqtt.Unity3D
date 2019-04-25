@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace MKdev.MqttForUnity.MqttBricks
+namespace MKdev.MqttForUnity.MqttBricks.BrickEditor
 {
     [CustomEditor(typeof(AbsDoActionByMqttTopicValue))]
-    public class AbsDoActionByMqttTopicValueEditor : Editor
+    public class AbsDoActionByMqttTopicValueEditor : UnityEditor.Editor
     {
 
         public override void OnInspectorGUI()

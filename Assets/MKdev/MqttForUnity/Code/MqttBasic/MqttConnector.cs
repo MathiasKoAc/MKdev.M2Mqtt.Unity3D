@@ -5,7 +5,7 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 using System;
 using System.Collections;
 using MKdev.ServerConfig;
-using System.Net.Sockets;
+
 
 namespace MKdev.MqttForUnity
 {
@@ -38,10 +38,15 @@ namespace MKdev.MqttForUnity
                 client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
 
                 string clientId = Guid.NewGuid().ToString();
-                client.Connect(clientId, ServerConfig.GetUsername(), ServerConfig.GetPassword());
+                byte conacct = client.Connect(clientId, ServerConfig.GetUsername(), ServerConfig.GetPassword());
 
+                if (conacct != MqttMsgConnack.CONN_ACCEPTED)
+                {
+                    StopCoroutine("workQueueAndCall");
+                    Debug.LogError("MqttConnector can't Connect to the Broker. Check ServerConfig IP, Username, Password.");
+                }
             }
-            catch (SocketException se)
+            catch (Exception se)
             {
                 StopCoroutine("workQueueAndCall");
                 Debug.LogError("MqttConnector can't Connect to the Broker on IP: " + ServerConfig.GetServerIp());
