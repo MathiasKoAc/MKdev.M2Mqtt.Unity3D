@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a75150e2b4728429b5ce69ca199280, type: 3}
   m_Name: MqttConfig
   m_EditorClassIdentifier: 
-  ServerIp: 192.168.178.2
-  Username: uname
-  Password: securePwd
+  ServerIp: 192.168.0.2
+  Username: SMILE
+  Password: SMARTHOME70124231
