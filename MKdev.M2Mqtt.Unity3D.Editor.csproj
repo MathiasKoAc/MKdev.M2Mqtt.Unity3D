@@ -313,6 +313,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBricks\Editor\AbsDoActionByMqttTopicValueEditor.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBricks\Editor\DoActionByMqttTopicFloatValueEditor.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBricks\Editor\DoActionByMqttTopicIntValueEditor.cs" />
+    <Compile Include="Assets\MKdev\MqttForUnity\Code\MqttBricks\Editor\DoActionByMqttTopicStringValueEditor.cs" />
     <Compile Include="Assets\MKdev\MqttForUnity\Code\ServerConfig\Editor\ConfigFromFileEditor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

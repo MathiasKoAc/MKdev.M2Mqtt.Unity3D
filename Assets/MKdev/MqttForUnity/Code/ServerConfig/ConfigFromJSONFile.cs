@@ -30,7 +30,7 @@ namespace MKdev.ServerConfig
         public string Username = "uname";
         public string Password = "securePwd";
 
-        public string filePath = "";
+        public string filePath = "config/mqttSetup.json";
         public bool onEnableReadFromFile = false;
 
         public void WriteToFile()

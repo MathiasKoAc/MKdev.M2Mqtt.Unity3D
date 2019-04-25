@@ -14,6 +14,12 @@ namespace MKdev.ServerConfig
             DrawDefaultInspector();
 
             ConfigFromJSONFile myScript = (ConfigFromJSONFile)target;
+
+            if (myScript.filePath == "")
+            {
+                EditorGUILayout.HelpBox("Please Setup File Path", MessageType.Warning);
+            }
+            
             if (GUILayout.Button("Write to File"))
             {
                 if (myScript != null)
