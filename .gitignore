@@ -1,4 +1,3 @@
-LogicBricks/Unity/3DGameKit/
 ~.*
 ~*.
 ~*
@@ -8,3 +7,4 @@ LogicBricks/Unity/3DGameKit/
 **/Temp/
 **/obj/
 config/
+Build/
