@@ -2,7 +2,7 @@
 
 namespace MKdev.MqttForUnity.MqttBricks
 {
-    public abstract class DoActionByMqttTopicValue : MonoBehaviour, IMqttTopicReceiver
+    public abstract class AbsDoActionByMqttTopicValue : MonoBehaviour, IMqttTopicReceiver
     {
 
         private MqttConnector MqttCon;

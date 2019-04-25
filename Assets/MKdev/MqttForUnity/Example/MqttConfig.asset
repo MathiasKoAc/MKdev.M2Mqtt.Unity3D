@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63a75150e2b4728429b5ce69ca199280, type: 3}
-  m_Name: New Config Object
+  m_Name: MqttConfig
   m_EditorClassIdentifier: 
-  MqttBrokerIp: 192.168.178.2
-  MqttUsername: uname
-  MqttPassword: securePwd
+  ServerIp: 192.168.178.2
+  Username: uname
+  Password: securePwd

@@ -2,7 +2,7 @@
 
 namespace MKdev.ServerConfig
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(fileName = "Data", menuName = "MKDev/SeverConfig/ConfigObject", order = 1)]
     public class ConfigObject : AbsServerConfig
     {
         public string ServerIp = "192.168.178.2";

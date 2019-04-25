@@ -5,7 +5,7 @@ namespace MKdev.MqttForUnity.MqttBricks
     /**
      * It is a Brick, which does a Action if the configert Topic changes a value
      */
-    public class DoActionByMqttTopicArives : DoActionByMqttTopicValue
+    public class DoActionByMqttTopicArives : AbsDoActionByMqttTopicValue
     {
         public override bool compareOk(byte[] message)
         {

@@ -3,7 +3,7 @@ using MKdev.Logic;
 
 namespace MKdev.MqttForUnity.MqttBricks
 {
-    public class DoActionByMqttTopicStringValue : DoActionByMqttTopicValue
+    public class DoActionByMqttTopicStringValue : AbsDoActionByMqttTopicValue
     {
         public EnumStringCompareOperator Compare;
         public string StrValue;

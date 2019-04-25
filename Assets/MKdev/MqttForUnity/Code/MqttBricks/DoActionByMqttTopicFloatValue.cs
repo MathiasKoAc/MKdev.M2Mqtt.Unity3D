@@ -3,16 +3,16 @@ using System;
 
 namespace MKdev.MqttForUnity.MqttBricks
 {
-    public class DoActionByMqttTopicIntValue : AbsDoActionByMqttTopicValue
+    public class DoActionByMqttTopicFloatValue : AbsDoActionByMqttTopicValue
     {
         public EnumCompareOperator Compare;
-        public int IntValue;
+        public float IntValue;
 
         public override bool compareOk(byte[] message)
         {
-            if(message.Length > 0)
+            if (message.Length > 0)
             {
-                int topicVal = BitConverter.ToInt32(message, 0);
+                float topicVal = BitConverter.ToSingle(message, 0);
 
                 switch (Compare)
                 {
