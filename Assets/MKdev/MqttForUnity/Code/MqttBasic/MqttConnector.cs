@@ -5,6 +5,7 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 using System;
 using System.Collections;
 using MKdev.ServerConfig;
+using System.Net.Sockets;
 
 namespace MKdev.MqttForUnity
 {
@@ -26,16 +27,27 @@ namespace MKdev.MqttForUnity
 
             eventQueue = new Queue<MqttMsgPublishEventArgs>();
             StartCoroutine("workQueueAndCall");
+
+            try
+            {
+                // create client instance 
+                //client = new MqttClient(IPAddress.Parse("143.185.118.233"),8080 , false , null ); 
+                client = new MqttClient(this.ServerConfig.GetServerIp());
+
+                // register to message received 
+                client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
+
+                string clientId = Guid.NewGuid().ToString();
+                client.Connect(clientId, ServerConfig.GetUsername(), ServerConfig.GetPassword());
+
+            }
+            catch (SocketException se)
+            {
+                StopCoroutine("workQueueAndCall");
+                Debug.LogError("MqttConnector can't Connect to the Broker on IP: " + ServerConfig.GetServerIp());
+                Debug.LogException(se);
+            }
             
-            // create client instance 
-            //client = new MqttClient(IPAddress.Parse("143.185.118.233"),8080 , false , null ); 
-            client = new MqttClient(this.ServerConfig.GetServerIp());
-
-            // register to message received 
-            client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
-
-            string clientId = Guid.NewGuid().ToString();
-            client.Connect(clientId, ServerConfig.GetUsername(), ServerConfig.GetPassword());
         }
 
         void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
@@ -89,10 +101,7 @@ namespace MKdev.MqttForUnity
             List<IMqttTopicReceiver> listReceiver = new List<IMqttTopicReceiver>();
             if(this.DictTopicReceiver.TryGetValue(topic, out listReceiver))
             {
-                listReceiver = new List<IMqttTopicReceiver>();
                 listReceiver.Add(receiver);
-                this.DictTopicReceiver.Add(topic, listReceiver);
-
                 client.Subscribe(new string[] { topic }, new byte[] { MqttQOS_Level });
 
             }
