@@ -5,7 +5,7 @@ namespace MKdev.MqttForUnity.MqttBricks
     public abstract class AbsDoActionByMqttTopicValue : MonoBehaviour, IMqttTopicReceiver
     {
 
-        private MqttConnector MqttCon;
+        private MqttConnectorSingleTon MqttCon;
 
         public InteractionEvent onStart;
 
