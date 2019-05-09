@@ -10,7 +10,8 @@ using MKdev.ServerConfig;
 namespace MKdev.MqttForUnity
 {
     /**
-     * It connects the UnityScene with the Broker
+     * The MqttConnector connects the UnityScene with the MqttBroker
+     * The Mqtt Connector uses Queues to seperate the thread-shedule from the coroutine-world
      */ 
     public class MqttConnector : MonoBehaviour
     {
@@ -75,7 +76,6 @@ namespace MKdev.MqttForUnity
         {
             //start of the concurrency (Nebenläufig) for receiving Messages
             StartCoroutine("workReceiverQueueAndCall");
-
             //start of the concurrency (Nebenläufig) for sending Messages
             StartCoroutine("workSenderQueueAndSend");
         }
@@ -120,6 +120,7 @@ namespace MKdev.MqttForUnity
                     client.Publish(mqttMessage.Topic, mqttMessage.Message, mqttMessage.QosLevel, mqttMessage.Retain);
                     Debug.Log("SEND# Topic: " + mqttMessage.Topic + " " + mqttMessage.Message.ToString());
                 }
+                yield return null;
             }
         }
 
