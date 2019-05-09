@@ -68,6 +68,9 @@ namespace MKdev.MqttForUnity
             receiverQueue.Enqueue(e);
         }
 
+        /**
+         * Inits and starts all InnerCoroutines
+         */
         private void InitAndStartInnerCoroutines()
         {
             //start of the concurrency (Nebenläufig) for receiving Messages
@@ -77,6 +80,9 @@ namespace MKdev.MqttForUnity
             StartInnerCoroutines();
         }
 
+        /**
+         * Starts all InnerCoroutines
+         */
         private void StartInnerCoroutines()
         {
             //start of the concurrency (Nebenläufig) for receiving Messages
@@ -85,6 +91,9 @@ namespace MKdev.MqttForUnity
             StartCoroutine("workSenderQueueAndSend");
         }
 
+        /**
+         * Stops all InnerCoroutines
+         */
         private void StopInnerCoroutines()
         {
             StopCoroutine("workReceiverQueueAndCall");
@@ -137,17 +146,26 @@ namespace MKdev.MqttForUnity
             }
         }
 
+        /**
+         * PublishMessage enqueues the Message of a Topic in the Queue and the message will automaticaly, concurrently sended
+         */ 
         public void PublishMessage(string topic, string Message, EnumMqttQualityOfService MqttQOS_Level = EnumMqttQualityOfService.QOS_LEVEL_EXACTLY_ONCE, bool retain = false)
         {
             Debug.Log("sending init");
             this.senderQueue.Enqueue(new MqttMsgPublishEventArgs(topic, System.Text.Encoding.UTF8.GetBytes(Message), false, (byte) MqttQOS_Level, retain));
         }
 
+        /**
+         * AddTopicReceiver added a receiver of an topic to the system. The receiver will autmaticaly called, if the topic gets a new message
+         */
         public void AddTopicReceiver(string topic, IMqttTopicReceiver receiver, EnumMqttQualityOfService MqttQOS_Level = EnumMqttQualityOfService.QOS_LEVEL_EXACTLY_ONCE)
         {
             AddTopicReceiver(topic, receiver, (byte)MqttQOS_Level);
         }
 
+        /**
+         * AddTopicReceiver added a receiver of an topic to the system. The receiver will autmaticaly called, if the topic gets a new message
+         */
         public void AddTopicReceiver(string topic, IMqttTopicReceiver receiver, byte MqttQOS_Level)
         {
             topic = topic.ToLower();
