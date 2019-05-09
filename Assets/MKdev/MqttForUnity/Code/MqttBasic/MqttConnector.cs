@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Text;
+using System.Collections;
 using System.Collections.Generic;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
-using System;
-using System.Collections;
+using UnityEngine;
+
 using MKdev.ServerConfig;
 
 
@@ -50,7 +52,7 @@ namespace MKdev.MqttForUnity
             catch (Exception se)
             {
                 this.StopInnerCoroutines();
-                Debug.LogError("MqttConnector can't Connect to the Broker on IP: " + ServerConfig.GetServerIp());
+                Debug.LogError(new StringBuilder("MqttConnector can't Connect to the Broker on IP: ").Append(ServerConfig.GetServerIp()));
                 Debug.LogException(se);
             }
             
@@ -118,7 +120,7 @@ namespace MKdev.MqttForUnity
                 {
                     MqttMsgPublishEventArgs mqttMessage = senderQueue.Dequeue();
                     client.Publish(mqttMessage.Topic, mqttMessage.Message, mqttMessage.QosLevel, mqttMessage.Retain);
-                    Debug.Log("SEND# Topic: " + mqttMessage.Topic + " " + mqttMessage.Message.ToString());
+                    Debug.Log(new StringBuilder("SEND# Topic: ").Append(mqttMessage.Topic));
                 }
                 yield return null;
             }
