@@ -58,11 +58,14 @@ namespace MKdev.MqttForUnity
             
         }
 
+        /**
+         * The Methode client_MqttMsgPublishReceived is called, if a MqttMessage arrieved and put it into the receiverQueue
+         * client_MqttMsgPublishReceived seperats the thread which puts the message in the queue from working the message
+         */
         void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
-            Debug.Log("Received: " + System.Text.Encoding.UTF8.GetString(e.Message) + " Topic: "+ e.Topic);
+            Debug.Log(new StringBuilder("Received: ").Append(System.Text.Encoding.UTF8.GetString(e.Message)).Append(" Topic: ").Append(e.Topic));
             receiverQueue.Enqueue(e);
-
         }
 
         private void InitAndStartInnerCoroutines()
@@ -88,6 +91,10 @@ namespace MKdev.MqttForUnity
             StopCoroutine("workSenderQueueAndSend");
         }
 
+        /**
+         * workReveiverQueueAndCall is a Inner Coroutine, which loops over the ReceivingQueue to call the Subscriper in this App
+         * workSenderQueueAndSend seperats the thread which puts the message in the queue from working the message
+         */
         private IEnumerator workReceiverQueueAndCall()
         {
             while(true)
@@ -112,6 +119,10 @@ namespace MKdev.MqttForUnity
             }
         }
 
+        /**
+         * workSenderQueueAndSend is a Inner Coroutine, which loops over the senderQueue to send a Message if there is one
+         * workSenderQueueAndSend seperats the call to send from the sending its self
+         */
         private IEnumerator workSenderQueueAndSend()
         {
             while(true)
