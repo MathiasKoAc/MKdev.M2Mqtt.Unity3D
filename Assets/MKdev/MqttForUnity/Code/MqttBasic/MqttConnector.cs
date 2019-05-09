@@ -19,14 +19,14 @@ namespace MKdev.MqttForUnity
         private MqttClient client;
         private Dictionary<string, List<IMqttTopicReceiver>> DictTopicReceiver;
 
-        private Queue<MqttMsgPublishEventArgs> eventQueue;
+        private Queue<MqttMsgPublishEventArgs> receiverQueue;
+        private Queue<MqttMsgPublishEventArgs> senderQueue;
 
         void Start()
         {
             DictTopicReceiver = new Dictionary<string, List<IMqttTopicReceiver>>();
 
-            eventQueue = new Queue<MqttMsgPublishEventArgs>();
-            StartCoroutine("workQueueAndCall");
+            InitAndStartInnerCoroutines();
 
             try
             {
@@ -42,13 +42,13 @@ namespace MKdev.MqttForUnity
 
                 if (conacct != MqttMsgConnack.CONN_ACCEPTED)
                 {
-                    StopCoroutine("workQueueAndCall");
+                    this.StopInnerCoroutines();
                     Debug.LogError("MqttConnector can't Connect to the Broker. Check ServerConfig IP, Username, Password.");
                 }
             }
             catch (Exception se)
             {
-                StopCoroutine("workQueueAndCall");
+                this.StopInnerCoroutines();
                 Debug.LogError("MqttConnector can't Connect to the Broker on IP: " + ServerConfig.GetServerIp());
                 Debug.LogException(se);
             }
@@ -58,17 +58,41 @@ namespace MKdev.MqttForUnity
         void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             Debug.Log("Received: " + System.Text.Encoding.UTF8.GetString(e.Message) + " Topic: "+ e.Topic);
-            eventQueue.Enqueue(e);
-            
+            receiverQueue.Enqueue(e);
+
         }
 
-        private IEnumerator workQueueAndCall()
+        private void InitAndStartInnerCoroutines()
+        {
+            //start of the concurrency (Nebenläufig) for receiving Messages
+            receiverQueue = new Queue<MqttMsgPublishEventArgs>();
+            //start of the concurrency (Nebenläufig) for sending Messages
+            senderQueue = new Queue<MqttMsgPublishEventArgs>();
+            StartInnerCoroutines();
+        }
+
+        private void StartInnerCoroutines()
+        {
+            //start of the concurrency (Nebenläufig) for receiving Messages
+            StartCoroutine("workReceiverQueueAndCall");
+
+            //start of the concurrency (Nebenläufig) for sending Messages
+            StartCoroutine("workSenderQueueAndSend");
+        }
+
+        private void StopInnerCoroutines()
+        {
+            StopCoroutine("workReceiverQueueAndCall");
+            StopCoroutine("workSenderQueueAndSend");
+        }
+
+        private IEnumerator workReceiverQueueAndCall()
         {
             while(true)
             {
-                if (eventQueue.Count > 0)
+                if (receiverQueue.Count > 0)
                 {
-                    MqttMsgPublishEventArgs e = eventQueue.Dequeue();
+                    MqttMsgPublishEventArgs e = receiverQueue.Dequeue();
                    
                     List<IMqttTopicReceiver> listReceiver = new List<IMqttTopicReceiver>();
                     if (DictTopicReceiver.TryGetValue(e.Topic.ToLower(), out listReceiver))
@@ -86,11 +110,23 @@ namespace MKdev.MqttForUnity
             }
         }
 
-        public void PublishMessage(string topic, string Message, EnumMqttQualityOfService MqttQOS_Level = EnumMqttQualityOfService.QOS_LEVEL_EXACTLY_ONCE)
+        private IEnumerator workSenderQueueAndSend()
         {
-            Debug.Log("sending...");
-            client.Publish(topic, System.Text.Encoding.UTF8.GetBytes(Message), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, true);
-            Debug.Log("sent");
+            while(true)
+            {
+                if(senderQueue.Count > 0)
+                {
+                    MqttMsgPublishEventArgs mqttMessage = senderQueue.Dequeue();
+                    client.Publish(mqttMessage.Topic, mqttMessage.Message, mqttMessage.QosLevel, mqttMessage.Retain);
+                    Debug.Log("SEND# Topic: " + mqttMessage.Topic + " " + mqttMessage.Message.ToString());
+                }
+            }
+        }
+
+        public void PublishMessage(string topic, string Message, EnumMqttQualityOfService MqttQOS_Level = EnumMqttQualityOfService.QOS_LEVEL_EXACTLY_ONCE, bool retain = false)
+        {
+            Debug.Log("sending init");
+            this.senderQueue.Enqueue(new MqttMsgPublishEventArgs(topic, System.Text.Encoding.UTF8.GetBytes(Message), false, (byte) MqttQOS_Level, retain));
         }
 
         public void AddTopicReceiver(string topic, IMqttTopicReceiver receiver, EnumMqttQualityOfService MqttQOS_Level = EnumMqttQualityOfService.QOS_LEVEL_EXACTLY_ONCE)
